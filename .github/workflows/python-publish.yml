@@ -26,10 +26,12 @@ jobs:
       - name: Pull DVC data
         env:
          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-     
+        
+         repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
          
           dvc remote list
+          dvc dag
           dvc pull data
 
       - name: Reproduce DVC pipeline
