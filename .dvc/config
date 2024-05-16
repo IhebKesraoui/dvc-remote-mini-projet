@@ -3,3 +3,5 @@
 ['remote "myremote"']
     url = gdrive://10ICUQc5ynq2Tl0Qtb_yCjNLuBsTcOPDm
     gdrive_use_service_account = true
+    gdrive_service_account_json_file_path = /home/nanoz-admin/Desktop/projects/tdms_samples/default.json
+    gdrive_service_account_user_email = ihebkesraoui@nanoz-group.com
