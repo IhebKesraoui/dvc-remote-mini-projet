@@ -33,8 +33,7 @@ jobs:
          
           dvc remote list
           dvc dag
-          dvc pull data
-
+          dvc pull data --run-cache
       - name: Reproduce DVC pipeline
         run: |
           dvc repro
