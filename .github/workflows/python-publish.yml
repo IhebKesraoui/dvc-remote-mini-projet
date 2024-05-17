@@ -1,45 +1,22 @@
-name: CML & DVC
+name: Your Workflow
+
 on: [push]
+
 jobs:
-  train-and-report:
+  example-job:
     runs-on: ubuntu-latest
-    # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-      - uses: iterative/setup-cml@v1
-      - uses: iterative/setup-dvc@v1
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
+    - name: Set up environment
+      run: echo "Setting up environment variables"
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Pull DVC data
-        env:
-         GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-        
-         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-         
-          dvc remote list
-          dvc dag
-          dvc pull data
-
-      - name: Reproduce DVC pipeline
-        run: |
-          dvc repro
-
-      - name: Fetch master branch
-        run: |
-          git fetch --prune origin +refs/heads/master:refs/remotes/origin/master
-
-      
+    # Add steps here that require Google Drive authentication
+    - name: Example step that uses Google Drive credentials
+      run: |
+        echo "$GDRIVE_CREDENTIALS_DATA" > gdrive-credentials.json
+        # Your command that uses the credentials file
